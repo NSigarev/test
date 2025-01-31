@@ -21,5 +21,7 @@
 }
 .text {
   font-size: 16px;
+  font-weight: 400;
+  color: #333333;
 }
 </style>

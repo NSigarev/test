@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import BVO from "@/assets/img_replace.png";
 const props = defineProps<{
   user: { fio: string; mail: string; img: string };
+  selected: boolean;
 }>();
 const defaultImage = BVO;
 const imageSrc = ref<string>(defaultImage);
@@ -17,7 +18,7 @@ function handleError() {
 <template>
   <div class="mini-user">
     <img class="image" :src="imageSrc" @error="handleError" alt="User Image" />
-    <div class="user">
+    <div :class="['user', selected ? 'selected' : '']">
       <a class="bold-text">{{ user.fio }}</a>
       <a class="main-text">{{ user.mail }}</a>
     </div>
@@ -34,15 +35,15 @@ function handleError() {
   box-shadow: 0 0 10px 0 #0000001a;
   overflow: hidden;
   border-radius: 10px;
-  &:hover .user {
-    background: #e0e0e0;
-  }
+}
+.selected {
+  background: #e0e0e0;
 }
 .image {
   max-height: 100%;
   height: 70px;
   aspect-ratio: 1;
-  object-fit: cover; /* Заполнение контейнера без искажения */
+  object-fit: cover;
 }
 .user {
   display: flex;

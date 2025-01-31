@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import Sidebar from "./sidebar.vue";
 import UserShower from "./userShower.vue";
+import { UserResult } from "@/types/user";
+import { ref } from "vue";
+const currentUser = ref<UserResult | undefined>(undefined);
 </script>
 
 <template>
   <div class="mBody">
-    <sidebar></sidebar>
-    <user-shower></user-shower>
+    <sidebar
+      @selected="
+        (user: UserResult | undefined) => {
+          if (user) currentUser = user;
+        }
+      "
+    ></sidebar>
+    <user-shower :user="currentUser"></user-shower>
   </div>
 </template>
 

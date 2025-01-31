@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vue"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

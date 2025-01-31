@@ -1,8 +1,8 @@
 export interface UserResult {
   id: number;
-  fio: string;
-  mail: string;
+  name: string;
+  username: string;
+  email: string;
   phone: string;
-  text: string;
   img: string;
 }

@@ -1,15 +1,34 @@
 <script setup lang="ts">
 import { UserResult } from "@/types/user";
+import BVO from "@/assets/img_replace.png";
+import { onMounted, ref, watch } from "vue";
 
 const props = defineProps<{
   user: UserResult | undefined;
 }>();
+const defaultImage = BVO;
+const imageSrc = ref<string>(defaultImage);
+function handleError() {
+  imageSrc.value = defaultImage; // Подставляем заглушку при ошибке загрузки
+}
+onMounted(() => {
+  imageSrc.value = props.user?.img ?? defaultImage;
+});
+watch(
+  () => props.user,
+  () => (imageSrc.value = props.user?.img ?? defaultImage),
+);
 </script>
 
 <template>
   <div class="container">
     <div v-if="user" class="profile-card">
-      <img :src="user.img" alt="Profile Picture" class="profile-image" />
+      <img
+        :src="imageSrc"
+        @error="handleError"
+        alt="Profile Picture"
+        class="profile-image"
+      />
       <div class="text-info">
         <a class="title">{{ user.fio }}</a>
         <p>
@@ -24,7 +43,9 @@ const props = defineProps<{
         <a class="main-text">{{ user.text }}</a>
       </div>
     </div>
-    <a v-else>FUCK</a>
+    <a class="center main-text" v-else
+      >Выберите сотрудника, чтобы посмотреть его профиль</a
+    >
   </div>
 </template>
 
@@ -54,7 +75,11 @@ p {
   object-fit: cover;
   border: 1px solid #e0e0e0;
 }
-
+.center {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
 .container {
   border-left: 1px solid #dededd;
   display: flex;

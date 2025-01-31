@@ -15,6 +15,7 @@
   width: 100%;
 }
 .title {
+  color: #e31f24;
   font-weight: 700;
   font-size: 32px;
 }

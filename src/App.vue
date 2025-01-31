@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import MainBody from "./components/mainComponent.vue";
+import "./assets/styles.css";
 </script>
 
 <template>
@@ -8,11 +9,8 @@ import MainBody from "./components/mainComponent.vue";
   </main>
 </template>
 
-<style scoped>
-main {
-  height: 100vh;
-  width: 100vw;
-  padding: 50px;
-  font-family: Montserrat, serif;
+<style>
+body {
+  margin: 0;
 }
 </style>

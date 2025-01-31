@@ -4,8 +4,36 @@ import { ref } from "vue";
 import { UserResult } from "@/types/user";
 import { useUserStore } from "@/store";
 const store = useUserStore();
+const errorText = ref<string | undefined>(undefined);
 async function fetchUsers(): Promise<void> {
-  users.value = await store.fetchUsers();
+  findStr.value = findStr.value.replace(/[^a-zA-Z0-9, ]/g, "");
+  const arr = findStr.value
+    .split(", ")
+    .map((val: string) => {
+      if (!val || val.length == 0) return undefined;
+      const numb = +val;
+      if (typeof numb === "number" && !isNaN(numb)) {
+        return numb;
+      } else return val;
+    })
+    .filter((val) => val !== undefined);
+  const result: string = arr.reduce(
+    (res: string, val: number | string, idx: number) => {
+      if (idx !== 0) res += "&";
+      if (typeof val == "number") {
+        res += `id=${val}`;
+      } else {
+        res += `username=${val}`;
+      }
+      return res;
+    },
+    "",
+  );
+  try {
+    users.value = await store.fetchUsers(result);
+  } catch (e: any) {
+    errorText.value = e.message;
+  }
 }
 const users = ref<UserResult[]>([]);
 const findStr = ref<string>("Antonette, Bret");
@@ -20,9 +48,10 @@ const emit = defineEmits<{
     <a class="bold-text">Поиск сотрудников</a>
     <input
       class="input main-text"
-      :value="findStr"
+      v-model="findStr"
       @blur="() => fetchUsers()"
     />
+    <a v-if="errorText" style="color: red"> {{ errorText }}</a>
     <a class="bold-text">Результаты</a>
     <user-results
       v-if="users && users.length > 0"

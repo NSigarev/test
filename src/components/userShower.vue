@@ -52,20 +52,36 @@ watch(
 
 <style lang="scss" scoped>
 .profile-card {
+  //display: flex;
+  //flex-direction: column;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 30px;
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-}
-p {
-  margin: 0;
 }
 .text-info {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.profile-image {
+  width: 100%;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+  border: 1px solid #e0e0e0;
+}
+@media (min-width: 950px) {
+  .profile-card {
+    flex-wrap: nowrap;
+    align-items: start;
+  }
+
+  .profile-image {
+    width: 320px;
+    flex-shrink: 0;
+  }
+}
+p {
+  margin: 0;
 }
 .title {
   font-weight: 700;
@@ -73,14 +89,6 @@ p {
 }
 .big {
   font-size: 16px;
-}
-.profile-image {
-  max-width: 320px;
-  height: auto;
-  width: 100%;
-  aspect-ratio: 1.5;
-  object-fit: cover;
-  border: 1px solid #e0e0e0;
 }
 .center {
   width: fit-content;

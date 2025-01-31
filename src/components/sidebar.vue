@@ -28,7 +28,7 @@ const emit = defineEmits<{
       v-if="users && users.length > 0"
       :users="users"
       @selected="
-        (idx) => {
+        (idx: number | undefined) => {
           selectedUser = idx !== undefined ? users[idx] : undefined;
           emit('selected', selectedUser);
         }

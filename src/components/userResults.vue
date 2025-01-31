@@ -2,7 +2,7 @@
 import MiniUser from "./miniUser.vue";
 import { ref, watch } from "vue";
 const props = defineProps<{
-  users: { fio: string; mail: string; img: string }[];
+  users: { name: string; email: string; img: string }[];
 }>();
 const emit = defineEmits<{
   (e: "selected", val: number | undefined): void;

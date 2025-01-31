@@ -5,4 +5,5 @@ export interface UserResult {
   email: string;
   phone: string;
   img: string;
+  text: string;
 }

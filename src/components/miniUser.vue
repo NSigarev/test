@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import BVO from "@/assets/img_replace.png";
 const props = defineProps<{
-  user: { fio: string; mail: string; img: string };
+  user: { username: string; email: string; img: string };
   selected: boolean;
 }>();
 const defaultImage = BVO;
@@ -19,8 +19,8 @@ function handleError() {
   <div class="mini-user">
     <img class="image" :src="imageSrc" @error="handleError" alt="User Image" />
     <div :class="['user', selected ? 'selected' : '']">
-      <a class="bold-text">{{ user.fio }}</a>
-      <a class="main-text">{{ user.mail }}</a>
+      <a class="bold-text">{{ user.username }}</a>
+      <a class="main-text">{{ user.email }}</a>
     </div>
   </div>
 </template>

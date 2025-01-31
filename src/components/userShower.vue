@@ -30,10 +30,10 @@ watch(
         class="profile-image"
       />
       <div class="text-info">
-        <a class="title">{{ user.fio }}</a>
+        <a class="title">{{ user.name }}</a>
         <p>
           <a class="bold-text">email: </a
-          ><a class="main-text">{{ user.mail }}</a>
+          ><a class="main-text">{{ user.email }}</a>
         </p>
         <p>
           <a class="bold-text">phone: </a
@@ -43,15 +43,21 @@ watch(
         <a class="main-text">{{ user.text }}</a>
       </div>
     </div>
-    <a class="center main-text" v-else
-      >Выберите сотрудника, чтобы посмотреть его профиль</a
-    >
+    <div v-else class="flex-col">
+      <a class="center main-text">Выберите сотрудника, чтобы посмотреть его профиль</a
+      >
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .profile-card {
   display: flex;
+  flex-direction: column;
+  gap: 30px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 p {
   margin: 0;
@@ -60,7 +66,6 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-left: 60px;
 }
 .title {
   font-weight: 700;
@@ -70,7 +75,9 @@ p {
   font-size: 16px;
 }
 .profile-image {
-  height: 240px;
+  max-width: 320px;
+  height: auto;
+  width: 100%;
   aspect-ratio: 1.5;
   object-fit: cover;
   border: 1px solid #e0e0e0;
@@ -82,8 +89,11 @@ p {
 }
 .container {
   border-left: 1px solid #dededd;
+  padding: 30px 20px;
+}
+.flex-col {
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  height: 100%;
 }
 </style>

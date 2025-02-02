@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import BVO from "@/assets/img_replace.png";
 const props = defineProps<{
   user: { username: string; email: string; img: string };
@@ -8,11 +8,15 @@ const props = defineProps<{
 const defaultImage = BVO;
 const imageSrc = ref<string>(defaultImage);
 onMounted(() => {
-  imageSrc.value = props.user.img;
+  imageSrc.value = props.user?.img ?? defaultImage;
 });
 function handleError() {
   imageSrc.value = defaultImage; // Подставляем заглушку при ошибке загрузки
 }
+watch(
+  () => props.user,
+  () => (imageSrc.value = props.user?.img ?? defaultImage),
+);
 </script>
 
 <template>
